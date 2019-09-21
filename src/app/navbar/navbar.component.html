@@ -1,0 +1,169 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <img
+        src="assets/logo-icon.png"
+        width="32"
+        height="32"
+        class="is-square"
+      />
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a
+            class="button is-primary"
+            (click)="showSignupModal = true"
+            *ngIf="authenticated === false"
+          >
+            <strong>Signup</strong>
+          </a>
+          <a
+            class="button is-light"
+            (click)="showLoginModal = true"
+            *ngIf="authenticated === false"
+          >
+            Login
+          </a>
+
+          <a class="button is-danger" (click)="logout()" *ngIf="authenticated">
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal" #loginModal [ngClass]="showLoginModal ? 'is-active' : ''">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Login</p>
+      <button
+        class="delete"
+        aria-label="close"
+        (click)="showLoginModal = false"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="text"
+            placeholder="username"
+            #loginUsername
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="password"
+            #loginPassword
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button
+        class="button is-success"
+        (click)="login(loginUsername.value, loginPassword.value)"
+      >
+        Login
+      </button>
+      <button class="button" (click)="showLoginModal = false">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<div class="modal" #signupModal [ngClass]="showSignupModal ? 'is-active' : ''">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Signup</p>
+      <button
+        class="delete"
+        aria-label="close"
+        (click)="showSignupModal = false"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="text"
+            placeholder="username"
+            #signupUsername
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="password"
+            #signupPassword
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Confirm</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="password"
+            #signupConfirmation
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Signup</button>
+      <button class="button" (click)="showSignupModal = false">Cancel</button>
+    </footer>
+  </div>
+</div>
