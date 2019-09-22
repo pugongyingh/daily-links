@@ -50,120 +50,13 @@
   </div>
 </nav>
 
-<div class="modal" #loginModal [ngClass]="showLoginModal ? 'is-active' : ''">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Login</p>
-      <button
-        class="delete"
-        aria-label="close"
-        (click)="showLoginModal = false"
-      ></button>
-    </header>
-    <section class="modal-card-body">
-      <div class="field">
-        <label class="label">Username</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="text"
-            placeholder="username"
-            #loginUsername
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
+<app-login-modal
+  [active]="showLoginModal"
+  (closed)="showLoginModal = false"
+  (submitted)="login($event.username, $event.password)"
+></app-login-modal>
 
-      <div class="field">
-        <label class="label">Password</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="password"
-            #loginPassword
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-          </span>
-        </div>
-      </div>
-    </section>
-    <footer class="modal-card-foot">
-      <button
-        class="button is-success"
-        (click)="login(loginUsername.value, loginPassword.value)"
-      >
-        Login
-      </button>
-      <button class="button" (click)="showLoginModal = false">Cancel</button>
-    </footer>
-  </div>
-</div>
-
-<div class="modal" #signupModal [ngClass]="showSignupModal ? 'is-active' : ''">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Signup</p>
-      <button
-        class="delete"
-        aria-label="close"
-        (click)="showSignupModal = false"
-      ></button>
-    </header>
-    <section class="modal-card-body">
-      <div class="field">
-        <label class="label">Username</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="text"
-            placeholder="username"
-            #signupUsername
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Password</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="password"
-            #signupPassword
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Confirm</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="password"
-            #signupConfirmation
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-          </span>
-        </div>
-      </div>
-    </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success">Signup</button>
-      <button class="button" (click)="showSignupModal = false">Cancel</button>
-    </footer>
-  </div>
-</div>
+<app-signup-modal
+  [active]="showSignupModal"
+  (closed)="showSignupModal = false"
+></app-signup-modal>
