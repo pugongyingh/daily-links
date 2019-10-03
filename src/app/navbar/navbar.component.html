@@ -59,4 +59,5 @@
 <app-signup-modal
   [active]="showSignupModal"
   (closed)="showSignupModal = false"
+  (submitted)="signup($event.username, $event.password)"
 ></app-signup-modal>

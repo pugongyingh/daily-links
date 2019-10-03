@@ -14,7 +14,9 @@ app.post('/.netlify/functions/signup', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    console.log(await client.query(q.Paginate(q.Match(q.Index('all_users')))));
+    console.log(
+      await client.query(q.Get(q.Match(q.Index('users_by_username'), 'jake'))),
+    );
 
     /** @type { { data: { username: string } } }  */
     const user = await client.query(
@@ -29,6 +31,7 @@ app.post('/.netlify/functions/signup', async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.error(error);
     next(error);
   }
 });

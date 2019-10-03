@@ -26,6 +26,19 @@ export class AuthService {
     return false;
   }
 
+  public signup(username: string, password: string) {
+    return this.http
+      .post<{ user: { username: string } }>(`${this.url}/signup`, {
+        username,
+        password,
+      })
+      .pipe(
+        map(res => {
+          console.log(res);
+        }),
+      );
+  }
+
   public login(username: string, password: string) {
     return this.http
       .post<{ token: string }>(`${this.url}/login`, {

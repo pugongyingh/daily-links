@@ -6,30 +6,39 @@
       <button class="delete" aria-label="close" (click)="close()"></button>
     </header>
     <section class="modal-card-body">
-      <div class="field">
-        <label class="label">Username</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input" type="text" placeholder="username" #username />
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
+      <form>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="text"
+              placeholder="username"
+              autocomplete="username"
+              #username
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Password</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="password"
-            #password
-          />
-          <span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-          </span>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="password"
+              placeholder="password"
+              autocomplete="current-password"
+              #password
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
+          </div>
         </div>
-      </div>
+      </form>
     </section>
     <footer class="modal-card-foot">
       <button

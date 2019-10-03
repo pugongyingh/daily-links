@@ -18,6 +18,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {}
 
+  public signup(username: string, password: string) {
+    this.auth.signup(username, password).subscribe(
+      () => {
+        this.showSignupModal = false;
+      },
+      error => {
+        console.error('Error signing up');
+      },
+    );
+  }
+
   public login(username: string, password: string) {
     this.auth.login(username, password).subscribe(
       () => {
