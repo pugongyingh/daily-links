@@ -43,7 +43,15 @@ registerDefaultErrorHandler();
 exports.handler = async (event, context) => {
     try {
       
+              let body;
+        try{
+                body = JSON.parse(event.body);
+        }catch(ex){
+                body = event.body;
+        }
 
+        let username = body.username;
+        let password = body.password;
    // const { username, password } = event.body;
 
     /** @type { { data: { username: string, password: string } } }  */
