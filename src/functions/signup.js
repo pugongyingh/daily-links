@@ -40,7 +40,7 @@ registerDefaultErrorHandler();
 
 //const server = awsServerlessExpress.createServer(app);
 
-exports.handler = (event, context) => {
+exports.handler = async (event, context) => {
     try {
       
               let body;
