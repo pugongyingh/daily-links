@@ -38,8 +38,8 @@ app.post('/.netlify/functions/signup', async (req, res, next) => {
 
 registerDefaultErrorHandler();
 
-const server = awsServerlessExpress.createServer(app);
+//const server = awsServerlessExpress.createServer(app);
 
 exports.handler = (event, context) => {
-  return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
+  return "8888";
 };
