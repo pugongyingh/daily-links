@@ -80,12 +80,9 @@ exports.handler = async (event, context) => {
       },
     );
 
-    res.json({
-      token,
-    });
+context.succeed(token);
   } catch (error) {
     console.error(error);
-    next(error);
   }
   return "8888";
 };
