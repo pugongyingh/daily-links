@@ -43,46 +43,32 @@ registerDefaultErrorHandler();
 exports.handler = async (event, context) => {
     try {
       
-              let body;
-        try{
-                body = JSON.parse(event.body);
-        }catch(ex){
-                body = event.body;
-        }
 
-        let username = body.username;
-        let password = body.password;
    // const { username, password } = event.body;
 
     /** @type { { data: { username: string, password: string } } }  */
-    const user = await client.query(
-      q.Get(q.Match(q.Index('users_by_username'), username)),
-    );
+   // const user = await client.query(
+  //    q.Get(q.Match(q.Index('users_by_username'), username)),
+ //   );
 
-    if (user == null) {
+ //   if (user == null) {
     /** @type { { data: { username: string } } }  */
     const user = await client.query(
       q.Create(q.Collection('users'), {
         data: { username, password: await bcrypt.hash(password, 10) },
       }),
     );
-    }
+ //   }
 
 
 
-    const token = jwt.sign(
-      {
-        username: user.data.username,
-      },
-      'secret',
-      {
-        expiresIn: '1h',
-      },
-    );
 
-context.succeed(token);
+  var token = jwt.sign(event, 'shhhhh');
+  context.succeed(token);      
+      
   } catch (error) {
-    console.error(error);
+    //console.error(error);
+      return "8888";
   }
   return "8888";
 };
