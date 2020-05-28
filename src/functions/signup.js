@@ -70,8 +70,8 @@ exports.handler = async (event, context) => {
   context.succeed(token);      
       
   } catch (error) {
-    //console.error(error);
-      return "8888";
+    console.error(error);
+      //return "8888";
   }
-  return "8888";
+  //return "8888";
 };
