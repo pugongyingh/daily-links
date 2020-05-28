@@ -3,7 +3,7 @@ const { app, registerDefaultErrorHandler } = require('./bootstrap/app');
 const awsServerlessExpress = require('aws-serverless-express');
 const faunadb = require('faunadb');
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const q = faunadb.query;
 
 const client = new faunadb.Client({
