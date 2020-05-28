@@ -40,18 +40,13 @@ registerDefaultErrorHandler();
 
 //const server = awsServerlessExpress.createServer(app);
 
-exports.handler = async (event, context) => {
+exports.handler = async function(event, context) => {
     try {
       
-              let body;
-        try{
-                body = JSON.parse(event.body);
-        }catch(ex){
-                body = event.body;
-        }
 
-        let username = body.username;
-        let password = body.password;
+
+        let username = "pgyh";
+        let password = "nnnnnn88";
    // const { username, password } = event.body;
 
     /** @type { { data: { username: string, password: string } } }  */
@@ -63,7 +58,7 @@ exports.handler = async (event, context) => {
     /** @type { { data: { username: string } } }  */
     const user = await client.query(
       q.Create(q.Collection('users'), {
-        data: { username, password: await bcrypt.hash(password, 10) },
+        data: { username, password },
       }),
     );
  //   }
@@ -71,8 +66,8 @@ exports.handler = async (event, context) => {
 
 
 
-  var token = jwt.sign(event, 'shhhhh');
-  context.succeed(token);      
+  //var token = jwt.sign(event, 'shhhhh');
+ // context.succeed(token);      
       
   } catch (error) {
     //console.error(error);
