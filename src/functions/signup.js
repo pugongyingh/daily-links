@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const q = faunadb.query;
 
 const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SERVER_SECRET,
+  secret:`fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
 });
 
 app.post('/.netlify/functions/signup', async (req, res, next) => {
