@@ -12,7 +12,7 @@ const faunadb = require('faunadb');
 const q = faunadb.query;
 
 const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SERVER_SECRET,
+  secret: `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
 });
 
 const opts = {};
