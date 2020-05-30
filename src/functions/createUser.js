@@ -66,14 +66,14 @@ exports.handler = async (event, context, callback) => {
       }),
     );
  //   }
-  var token = jwt.sign(username, 'shhhhh');  
+  //var token = jwt.sign(username, 'shhhhh');  
   			callback( null, {
 				headers: {
          //'content-type': 'text/html; charset=gb2312',
          'content-type': 'text/html; charset=utf-8',
 				},
 				statusCode: 200,
-      body: JSON.stringify(token)
+      body: "9999"
  
       
 			} );
