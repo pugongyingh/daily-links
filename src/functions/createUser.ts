@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         try{
                 body = JSON.parse(req.body);
         }catch(ex){
-                body = event.body;
+                body = req.body;
         }
 
         let username = body.username;
