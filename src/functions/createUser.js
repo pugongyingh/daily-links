@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
       }),
     );
  //   }
-  var token = jwt.sign(req.body, 'shhhhh');
+  var token = jwt.sign(event.body, 'shhhhh');
   //context.succeed(token);           
         // let res;
         // try {
@@ -58,16 +58,11 @@ exports.handler = async (event, context) => {
       //  };
       //  const token = jwt.sign({ user }, process.env.jwt_secret);
      //res.status(200).json({ token });
-     return {
-        authenticationToken: token,
-        role:[
-            'ROLE_ADMIN',
-            'ROLE_EMPLOYEE'
-        ]
+return { statusCode: 200, body: token };
     }     
 
   } catch (error) {
-    console.error(error);
-      return 'nnnoo';
+  return { statusCode: 500, body: error };
+      
   }
 };
