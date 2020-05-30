@@ -40,9 +40,9 @@ exports.handler =  async (req, res) => {
     if ( !username || !password ) {
        // res.send('incomplete input!')
   return {
-    status: 201,
-    type: 'application/json',
-    body: JSON.stringify({ok: true}),
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world!888</h1>',
     cors: true,
   }
       //  return;        
@@ -61,8 +61,8 @@ q.Get(q.Match(q.Index('users_by_username'), username))
       //  res.send({ token })
   return {
     status: 200,
-    type: 'application/json',
-    body: JSON.stringify({ok: true}),
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world!</h1>',
     cors: true,
   }
     }
@@ -71,8 +71,8 @@ q.Get(q.Match(q.Index('users_by_username'), username))
         res.setHeader('Content-Type', 'text/html');
   return {
     status: 500,
-    type: 'application/json',
-    body: JSON.stringify({ok: true}),
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world!999</h1>',
     cors: true,
   }
     }
