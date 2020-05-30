@@ -10,40 +10,14 @@ const client = new faunadb.Client({
   secret:`fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
 });
 
-app.post('/.netlify/functions/signup', async (req, res, next) => {
-  try {
-    const { username, password } = req.body;
-
-    console.log(
-      await client.query(q.Get(q.Match(q.Index('users_by_username'), 'jake'))),
-    );
-
-    /** @type { { data: { username: string } } }  */
-    const user = await client.query(
-      q.Create(q.Collection('users'), {
-        data: { username, password: await bcrypt.hash(password, 10) },
-      }),
-    );
-
-    res.json({
-      user: {
-        username: user.data.username,
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-registerDefaultErrorHandler();
-
-//const server = awsServerlessExpress.createServer(app);
-
-exports.handler = async (event, context, callback) => {
 
 
-              let body;
+
+
+exports.handler = async (event,context,callback) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    try {
+             let body;
         try{
                 body = JSON.parse(event.body);
         }catch(ex){
@@ -66,19 +40,13 @@ exports.handler = async (event, context, callback) => {
       }),
     );
  //   }
-  //var token = jwt.sign(username, 'shhhhh');  
-  			callback( null, {
-				headers: {
-         //'content-type': 'text/html; charset=gb2312',
-         'content-type': 'text/html; charset=utf-8',
-				},
-				statusCode: 200,
-      body: "9999"
- 
-      
-			} );
-		} )
-		.catch( ( error ) => {
-			callback( error );
-		} );
-};
+  var token = jwt.sign(username, 'shhhhh');  
+        callback(null,token)
+    } catch (err) { 
+        const error = {
+            status: err.status || 500,
+            message: err.message || "Internal server error."
+        }
+        callback(JSON.stringify(error));
+    } 
+}
