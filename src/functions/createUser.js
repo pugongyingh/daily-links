@@ -6,7 +6,7 @@ export const q = faunadb.query;
 
 export const client = new faunadb.Client({ secret });
 
-export const verifyToken = (token) => jwt.verify(token, process.env.jwt_secret);
+export const verifyToken = (token) => jwt.verify(token, "666777888");
 
 exports.handler = (event, context, callback) => {
     callback(null, loginHandler(event))
