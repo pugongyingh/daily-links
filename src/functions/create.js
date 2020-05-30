@@ -58,20 +58,11 @@ q.Get(q.Match(q.Index('users_by_username'), username))
         }
         let token = generate(data.username)
       //  res.send({ token })
-  res.setHeader('Content-Type', 'text/html');
-  res.write('<html>');
-  res.write('<head><title>My First Page</title><head>');
-  res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
-  res.write('</html>');
-  res.end();
+res.status(200).json('user ok');
     }
     catch (e) {
       //  res.send({error: 'user not found'})
         res.setHeader('Content-Type', 'text/html');
-  res.write('<html>');
-  res.write('<head><title>My 8888First Page</title><head>');
-  res.write('<body><h1>Hello 88888from my Node.js Server!</h1></body>');
-  res.write('</html>');
-  res.end();
+res.status(500).json('user not found');
     }
 }
