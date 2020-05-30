@@ -37,7 +37,13 @@ function generate(user) {
 exports.handler =  async (req, res) => {
     const { username, password } = req.body;
     if ( !username || !password ) {
-        res.send('incomplete input!')
+       // res.send('incomplete input!')
+        res.setHeader('Content-Type', 'text/html');
+  res.write('<html>');
+  res.write('<head><title>My 9999First Page</title><head>');
+  res.write('<body><h1>Hello f9999rom my Node.js Server!</h1></body>');
+  res.write('</html>');
+  res.end();
         return;        
     }
     try {
