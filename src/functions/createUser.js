@@ -58,11 +58,11 @@ exports.handler = async (event, context) => {
       //  };
       //  const token = jwt.sign({ user }, process.env.jwt_secret);
      //res.status(200).json({ token });
-return { statusCode: 200, body: token };
+return { statusCode: 200, body: JSON.stringify(token) };
     }     
 
   } catch (error) {
-  return { statusCode: 500, body: error };
+  return { statusCode: 500, body: JSON.stringify(error) };
       
   }
 };
