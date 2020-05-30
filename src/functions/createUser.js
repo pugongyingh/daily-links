@@ -1,10 +1,44 @@
+// @ts-check
+const { app, registerDefaultErrorHandler } = require('./bootstrap/app');
+const awsServerlessExpress = require('aws-serverless-express');
 const faunadb = require('faunadb');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// your secret hash
-const secret = `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`;
-export const q = faunadb.query;
+const q = faunadb.query;
 
-export const client = new faunadb.Client({ secret });
+const client = new faunadb.Client({
+  secret:`fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
+});
+
+app.post('/.netlify/functions/signup', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    console.log(
+      await client.query(q.Get(q.Match(q.Index('users_by_username'), 'jake'))),
+    );
+
+    /** @type { { data: { username: string } } }  */
+    const user = await client.query(
+      q.Create(q.Collection('users'), {
+        data: { username, password: await bcrypt.hash(password, 10) },
+      }),
+    );
+
+    res.json({
+      user: {
+        username: user.data.username,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+registerDefaultErrorHandler();
+
+//const server = awsServerlessExpress.createServer(app);
 
 exports.handler = async (event, context) => {
     try {
@@ -28,41 +62,14 @@ exports.handler = async (event, context) => {
     /** @type { { data: { username: string } } }  */
     const user = await client.query(
       q.Create(q.Collection('users'), {
-        data: { username, password },
+        data: { username, password: await bcrypt.hash(password, 10) },
       }),
     );
  //   }
-  var token = jwt.sign(event.body, 'shhhhh');
-  //context.succeed(token);           
-        // let res;
-        // try {
-        //     res = await client.query(
-        //         q.Get(q.Match(q.Index('find_user_by_login'), req?.body?.login))
-        //     );
-        // } catch (e) {}
-
-        // if (res?.data) {
-        //     throw new Error('User already exist');
-        // }
-
-    //    const dbs: any = await client.query(
-      //      q.Create(q.Ref(q.Collection('users'), q.NewId()), {
-      //          data: { ...req.body, id: q.NewId() },
-      //      })
-      //  );
-        // ok
-     //   const user = {
-     //       userId: dbs.data.id,
-     //       login: dbs.data.login,
-     //       name: dbs.data.name,
-      //  };
-      //  const token = jwt.sign({ user }, process.env.jwt_secret);
-     //res.status(200).json({ token });
-return { statusCode: 200, body: JSON.stringify(token) };
-    }     
-
+  var token = jwt.sign(event, 'shhhhh');
+  context.succeed(token);      
+ return { statusCode: 200, body: JSON.stringify(token) }     
   } catch (error) {
-  return { statusCode: 500, body: JSON.stringify(error) };
-      
+  return { statusCode: 500, body: JSON.stringify(error) }
   }
 };
