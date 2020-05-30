@@ -1,3 +1,4 @@
+var express = require('express');
 const { app, registerDefaultErrorHandler } = require('./bootstrap/app');
 const awsServerlessExpress = require('aws-serverless-express');
 const faunadb = require('faunadb');
@@ -38,8 +39,13 @@ exports.handler =  async (req, res) => {
     const { username, password } = req.body;
     if ( !username || !password ) {
        // res.send('incomplete input!')
-res.status(200).json('user ok99999');
-        return;        
+  return {
+    status: 201,
+    type: 'application/json',
+    body: JSON.stringify({ok: true}),
+    cors: true,
+  }
+      //  return;        
     }
     try {
         let { data } = await client.query(
@@ -53,11 +59,21 @@ q.Get(q.Match(q.Index('users_by_username'), username))
         }
         let token = generate(data.username)
       //  res.send({ token })
-res.status(200).json('user ok');
+  return {
+    status: 200,
+    type: 'application/json',
+    body: JSON.stringify({ok: true}),
+    cors: true,
+  }
     }
     catch (e) {
       //  res.send({error: 'user not found'})
         res.setHeader('Content-Type', 'text/html');
-res.status(500).json('user not found');
+  return {
+    status: 500,
+    type: 'application/json',
+    body: JSON.stringify({ok: true}),
+    cors: true,
+  }
     }
 }
