@@ -12,9 +12,6 @@ import jwt from 'jsonwebtoken';
 
 module.exports = async (req, res) => {
     try {
-      
-    try {
-
               let body;
         try{
                 body = JSON.parse(req.body);
