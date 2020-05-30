@@ -6,19 +6,14 @@ export const q = faunadb.query;
 
 export const client = new faunadb.Client({ secret });
 
-export const verifyToken = (token) => jwt.verify(token, "666777888");
-
-exports.handler = (event, context, callback) => {
-    callback(null, loginHandler(event))
-};
-
-function loginHandler(req) {
+exports.handler = async (event, context) => {
     try {
+
               let body;
         try{
-                body = JSON.parse(req.body);
+                body = JSON.parse(event.body);
         }catch(ex){
-                body = req.body;
+                body = event.body;
         }
 
         let username = body.username;
@@ -70,12 +65,9 @@ function loginHandler(req) {
             'ROLE_EMPLOYEE'
         ]
     }     
-      
-    } catch (e) {
-        // something went wrong
-       // res.status(500).json({ error: e.message });
-      return 'nnnoo';
-    } 
-  
 
-}
+  } catch (error) {
+    console.error(error);
+      return 'nnnoo';
+  }
+};
