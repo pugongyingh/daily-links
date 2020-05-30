@@ -40,8 +40,8 @@ registerDefaultErrorHandler();
 
 //const server = awsServerlessExpress.createServer(app);
 
-exports.handler = async (event, context) => {
-    try {
+exports.handler = async (event, context, callback) => {
+
 
               let body;
         try{
@@ -66,10 +66,19 @@ exports.handler = async (event, context) => {
       }),
     );
  //   }
-  var token = jwt.sign(event, 'shhhhh');
-  context.succeed(token);      
- return { statusCode: 200, body: JSON.stringify(token) }     
-  } catch (error) {
-  return { statusCode: 500, body: JSON.stringify(error) }
-  }
+  var token = jwt.sign(username, 'shhhhh');  
+  			callback( null, {
+				headers: {
+         //'content-type': 'text/html; charset=gb2312',
+         'content-type': 'text/html; charset=utf-8',
+				},
+				statusCode: 200,
+      body: JSON.stringify(token)
+ 
+      
+			} );
+		} )
+		.catch( ( error ) => {
+			callback( error );
+		} );
 };
