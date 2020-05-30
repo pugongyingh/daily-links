@@ -8,8 +8,11 @@ export const client = new faunadb.Client({ secret });
 
 export const verifyToken = (token) => jwt.verify(token, process.env.jwt_secret);
 
+exports.handler = (event, context, callback) => {
+    callback(null, loginHandler(event))
+};
 
-module.exports = async (req, res) => {
+function loginHandler(req) {
     try {
               let body;
         try{
@@ -47,11 +50,11 @@ module.exports = async (req, res) => {
         //     throw new Error('User already exist');
         // }
 
-        const dbs: any = await client.query(
-            q.Create(q.Ref(q.Collection('users'), q.NewId()), {
-                data: { ...req.body, id: q.NewId() },
-            })
-        );
+    //    const dbs: any = await client.query(
+      //      q.Create(q.Ref(q.Collection('users'), q.NewId()), {
+      //          data: { ...req.body, id: q.NewId() },
+      //      })
+      //  );
         // ok
      //   const user = {
      //       userId: dbs.data.id,
@@ -59,9 +62,20 @@ module.exports = async (req, res) => {
      //       name: dbs.data.name,
       //  };
       //  const token = jwt.sign({ user }, process.env.jwt_secret);
-        res.status(200).json({ token });
+     //res.status(200).json({ token });
+     return {
+        authenticationToken: token,
+        role:[
+            'ROLE_ADMIN',
+            'ROLE_EMPLOYEE'
+        ]
+    }     
+      
     } catch (e) {
         // something went wrong
-        res.status(500).json({ error: e.message });
-    }
-};
+       // res.status(500).json({ error: e.message });
+      return 'nnnoo';
+    } 
+  
+
+}
