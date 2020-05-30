@@ -34,7 +34,7 @@ function generate(user) {
 }
 
 
-module.exports = async (req, res) => {
+exports.handler =  async (req, res) => {
     const { username, password } = req.body;
     if ( !username || !password ) {
         res.send('incomplete input!')
