@@ -42,7 +42,7 @@ exports.handler =  async (req, res) => {
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world!888</h1>',
+    body: username + password,
     cors: true,
   }
       //  return;        
