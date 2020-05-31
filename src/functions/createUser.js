@@ -45,7 +45,7 @@ exports.handler = async (event,context,callback) => {
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world!</h1>',
+    body: '<h1>Hello world44!' + JSON.stringify(token) +'</h1>',
     cors: true,
   }      
     } catch (err) { 
