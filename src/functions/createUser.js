@@ -41,7 +41,13 @@ exports.handler = async (event,context,callback) => {
     );
  //   }
   var token = jwt.sign(username, 'shhhhh');  
-        callback(null,token)
+       //callback(null,token)
+  return {
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world!</h1>',
+    cors: true,
+  }      
     } catch (err) { 
         const error = {
             status: err.status || 500,
