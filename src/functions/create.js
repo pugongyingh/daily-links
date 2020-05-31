@@ -36,7 +36,18 @@ function generate(user) {
 
 
 exports.handler =  async (req, res) => {
-    const { username, password } = req.body;
+  
+      try {
+             let body;
+        try{
+                body = JSON.parse(req.body);
+        }catch(ex){
+                body = req.body;
+        }
+
+        let username = body.username;
+        let password = body.password;
+    //const { username, password } = req.body;
     if ( !username || !password ) {
        // res.send('incomplete input!')
   return {
