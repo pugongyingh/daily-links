@@ -40,12 +40,19 @@ exports.handler = async (event,context,callback) => {
       }),
     );
  //   }
-  var token = jwt.sign(username, 'shhhhh');  
+  var token = jwt.sign({name: username}, 'shhhhh');  
        //callback(null,token)
+  var ttt =   ""  ;
+jwt.verify(token, 'shhhhh', function (err, decoded) {
+    if (!err){
+          ttt=decoded.name;  //会输出123，如果过了60秒，则有错误。
+     }
+})      
+      
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world44!' + JSON.stringify(token) +'</h1>',
+    body: '<h1>Hello world44!' + ttt +'</h1>',
     cors: true,
   }      
     } catch (err) { 
