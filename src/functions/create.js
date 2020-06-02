@@ -35,14 +35,14 @@ function generate(user) {
 }
 
 
-exports.handler =  async (req, res) => {
-  
-      try {
+exports.handler = async (event,context,callback) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    try {
              let body;
         try{
-                body = JSON.parse(req.body);
+                body = JSON.parse(event.body);
         }catch(ex){
-                body = req.body;
+                body = event.body;
         }
 
         let username = body.username;
@@ -73,18 +73,17 @@ q.Get(q.Match(q.Index('users_by_username'), username))
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world!555</h1>',
+    body: JSON.stringify({token: token}),
     cors: true,
-  }
-    }
-    catch (e) {
-      //  res.send({error: 'user not found'})
-        res.setHeader('Content-Type', 'text/html');
-  return {
-    status: 500,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world!999</h1>',
-    cors: true,
-  }
-    }
-}
+  }      
+    } catch (err) { 
+        const error = {
+            status: err.status || 500,
+            message: err.message || "Internal server error."
+        }
+        callback(JSON.stringify(error));
+    } 
+}        
+        
+        
+
