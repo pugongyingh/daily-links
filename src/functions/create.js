@@ -50,7 +50,12 @@ exports.handler = async (event,context,callback) => {
     //const { username, password } = req.body;
     if ( !username || !password ) {
        // res.send('incomplete input!')
-
+  return {
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello worldnnn'</h1>',
+    cors: true,
+  }   
       //  return;        
     }
 
