@@ -48,16 +48,7 @@ exports.handler = async (event,context,callback) => {
         let username = body.username;
         let password = body.password;
     //const { username, password } = req.body;
-    if ( !username || !password ) {
-       // res.send('incomplete input!')
-  return {
-    status: 200,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello worldnnn'</h1>',
-    cors: true,
-  }   
-      //  return;        
-    }
+    //if ( !username || !password ) {}
 
         let { data } = await client.query(
 q.Get(q.Match(q.Index('users_by_username'), username))
