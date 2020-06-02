@@ -73,7 +73,7 @@ q.Get(q.Match(q.Index('users_by_username'), username))
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: JSON.stringify({token: token}),
+    body: '<h1>Hello world!555</h1>',
     cors: true,
   }
     }
