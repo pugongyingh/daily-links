@@ -50,23 +50,18 @@ exports.handler = async (event,context,callback) => {
     //const { username, password } = req.body;
     if ( !username || !password ) {
        // res.send('incomplete input!')
-  return {
-    status: 200,
-    type: 'text/html; charset=utf8',
-    body: username + password,
-    cors: true,
-  }
+
       //  return;        
     }
-    try {
+
         let { data } = await client.query(
 q.Get(q.Match(q.Index('users_by_username'), username))
         )
     
        // let result =  await compare(password, data.password)
         if (!(password  == data.password)) {
-            res.send({error: 'wrong password'})
-            return
+          //  res.send({error: 'wrong password'})
+           // return
         }
         let token = generate(data.username)
       //  res.send({ token })
