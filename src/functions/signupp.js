@@ -21,13 +21,11 @@ app.post('/.netlify/functions/signupp', async (req, res, next) => {
         data: { username, password) },
       }),
     );
-    if (user == null) {
-      return next(new Error('User not found'));
-    }
+
 
     const token = jwt.sign(
       {
-        username: user.data.username,
+        username: username,
       },
       'secret',
       {
