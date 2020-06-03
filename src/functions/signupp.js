@@ -17,9 +17,7 @@ app.post('/.netlify/functions/signupp', async (req, res, next) => {
 
     /** @type { { data: { username: string, password: string } } }  */
     const user = await client.query(
-      q.Create(q.Collection('users'), {
-        data: { username, password) },
-      }),
+      q.Create(q.Collection('users'), {data: { username, password},}),
     );
 
 
