@@ -24,10 +24,7 @@ app.post('/.netlify/functions/login', async (req, res, next) => {
       return next(new Error('User not found'));
     }
 
-    if ((await bcrypt.compare(password, user.data.password)) === false) {
-      return next(new Error('Invalid password'));
-    }
-
+    if (password == user.data.password) {
     const token = jwt.sign(
       {
         username: user.data.username,
@@ -41,6 +38,13 @@ app.post('/.netlify/functions/login', async (req, res, next) => {
     res.json({
       token,
     });
+    }
+          else
+      {      return next(new Error('Invalid password')); }
+   // if ((await bcrypt.compare(password, user.data.password)) === false) {
+    //  return next(new Error('Invalid password'));
+   // }
+
   } catch (error) {
     console.error(error);
     next(error);
