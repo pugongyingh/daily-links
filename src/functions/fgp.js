@@ -31,19 +31,13 @@ export async function handler(event, context, callback){
 
 
 
-try{
+
 
   return {
     statusCode: 200,
     body: "777"+username
   }
-}catch(err){
-//console.log(err)
-  return {
-    statusCode: 400,
-    body: "err"
-  };
-}
+
 
 }
 
