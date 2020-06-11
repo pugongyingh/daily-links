@@ -53,7 +53,7 @@ exports.handler = async (event,context,callback) => {
     //const { email }  = JSON.parse(event.body) 
     let mailOptions = {
       from: "mit777@sina.com",
-      to: user.data.username,
+      to: username,
       subject: "888",
       text: "999",
   };
