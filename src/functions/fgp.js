@@ -22,7 +22,10 @@ app.post('/.netlify/functions/fgp', async (req, res, next) => {
     );
 
     if (user == null) {
-      return next(new Error('User not found'));
+     // return next(new Error('User not found'));
+          res.json({
+      username,
+    });
     }
 
     const transport = nodemailer.createTransport({
