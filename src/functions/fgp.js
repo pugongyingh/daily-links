@@ -16,7 +16,7 @@ const client = new faunadb.Client({
 export async function handler(event, context, callback){
  // const { user, pass} = process.env
 // const  body = JSON.parse(event.body);
-    const username = event.body.username;
+    const username = event.body;
 
     /** @type { { data: { username: string, password: string } } }  */
     const user = await client.query(
