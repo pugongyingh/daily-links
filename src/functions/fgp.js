@@ -34,7 +34,7 @@ exports.handler = async (event,context,callback) => {
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!'  +'</h1>',
+    body: '<h1>Hello world4470007!' +username +'</h1>',
     cors: true,
   } 
     }
@@ -79,7 +79,7 @@ const url = `http://127.0.0.1:8076/dy/change-password.html?` + token;
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4477!'  +'</h1>',
+    body: '<h1>Hello world4477!'  +username+'</h1>',
     cors: true,
   }      
     } catch (err) { 
