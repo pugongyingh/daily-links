@@ -13,31 +13,51 @@ const client = new faunadb.Client({
 
 
 
-export async function handler(event, context, callback){
- // const { user, pass} = process.env
-// const  body = JSON.parse(event.body);
-    const username = event.body;
+exports.handler = async (event,context,callback) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    try {
+             let body;
+        try{
+                body = JSON.parse(event.body);
+        }catch(ex){
+                body = event.body;
+        }
+
+        let username = body.username;
+ 
+   // const { username, password } = event.body;
 
     /** @type { { data: { username: string, password: string } } }  */
+   // const user = await client.query(
+  //    q.Get(q.Match(q.Index('users_by_username'), username)),
+ //   );
+ //   if (user == null) {
+    /** @type { { data: { username: string } } }  */
     const user = await client.query(
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
     if (user == null) {
   return {
-    statusCode: 200,
-    body: "999"+username
-  }
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world4499!'  +'</h1>',
+    cors: true,
+  }  
     }
-
-
-
-
-
+     
+      
   return {
-    statusCode: 200,
-    body: "777"+username
-  }
-
-
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world4477!'  +'</h1>',
+    cors: true,
+  }      
+    } catch (err) { 
+        const error = {
+            status: err.status || 500,
+            message: err.message || "Internal server error."
+        }
+        callback(JSON.stringify(error));
+    } 
 }
 
