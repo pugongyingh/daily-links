@@ -4,7 +4,7 @@ const awsServerlessExpress = require('aws-serverless-express');
 const bcrypt = require('bcryptjs');
 const faunadb = require('faunadb');
 const jwt = require('jsonwebtoken');
-
+const nodemailer = require("nodemailer");
 const q = faunadb.query;
 
 const client = new faunadb.Client({
@@ -13,17 +13,17 @@ const client = new faunadb.Client({
 
 app.post('/.netlify/functions/fgp', async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username } = req.body;
 
     /** @type { { data: { username: string, password: string } } }  */
     const user = await client.query(
-      q.Create(q.Collection('users'), {data: { username, password},}),
+      q.Get(q.Match(q.Index('users_by_username'), username)),
     );
 
 
     const token = jwt.sign(
       {
-        username: username,
+        username: user.data.username,
       },
       'secret',
       {
