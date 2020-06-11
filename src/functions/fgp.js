@@ -13,16 +13,14 @@ const client = new faunadb.Client({
 
 app.post('/.netlify/functions/fgp', async (req, res, next) => {
   try {
-    const { username } = req.body;
+    const username = req.body;
 
     /** @type { { data: { username: string, password: string } } }  */
     const user = await client.query(
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
     if (user == null) {
-       res.json({
-      username,
-    });
+
     }
 
     const token = jwt.sign(
@@ -40,7 +38,7 @@ app.post('/.netlify/functions/fgp', async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    next(error);
+  
   }
 });
 
