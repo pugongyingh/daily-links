@@ -67,7 +67,7 @@ exports.handler = async (event,context,callback) => {
       },
     );
 const url = `http://127.0.0.1:8076/dy/change-password.html?` + token;
-    transporter.sendMail({
+    transport.sendMail({
       to: username,
       subject: "Confirm email",
       html: `Please click this link to confirm your email: <a href=${url}>${url}</a>`
