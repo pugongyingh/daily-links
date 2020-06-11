@@ -12,7 +12,7 @@ const client = new faunadb.Client({
 });
 
   
-app.post('/.netlify/functions/fpg', async (req, res, next) => {
+app.post('/.netlify/functions/fgp', async (req, res, next) => {
   try {
     const { username} = req.body;
 
