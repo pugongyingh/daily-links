@@ -20,7 +20,9 @@ app.post('/.netlify/functions/fgp', async (req, res, next) => {
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
     if (user == null) {
-      return "999";
+       res.json({
+      username,
+    });
     }
 
     const token = jwt.sign(
