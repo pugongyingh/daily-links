@@ -15,8 +15,8 @@ const client = new faunadb.Client({
 
 export async function handler(event, context, callback){
  // const { user, pass} = process.env
- const  body = JSON.parse(event.body);
-    const username = body.username;
+// const  body = JSON.parse(event.body);
+    const username = event.body.username;
 
     /** @type { { data: { username: string, password: string } } }  */
     const user = await client.query(
@@ -25,7 +25,7 @@ export async function handler(event, context, callback){
     if (user == null) {
   return {
     statusCode: 200,
-    body: "999"
+    body: "999"+username
   }
     }
 
@@ -35,7 +35,7 @@ try{
 
   return {
     statusCode: 200,
-    body: "777"
+    body: "777"+username
   }
 }catch(err){
 //console.log(err)
