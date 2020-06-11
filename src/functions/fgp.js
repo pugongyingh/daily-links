@@ -24,26 +24,11 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
- 
-   // const { username, password } = event.body;
 
-    /** @type { { data: { username: string, password: string } } }  */
-   // const user = await client.query(
-  //    q.Get(q.Match(q.Index('users_by_username'), username)),
- //   );
- //   if (user == null) {
-    /** @type { { data: { username: string } } }  */
     const user = await client.query(
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
-    if (user == null) {
-  return {
-    status: 200,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4499!'  +'</h1>',
-    cors: true,
-  }  
-    }
+
      
       
   return {
