@@ -30,21 +30,14 @@ exports.handler = async (event,context,callback) => {
     );
 
 
-    if (user == null) {
-  return {
-    status: 200,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +'</h1>',
-    cors: true,
-  } 
-    }else{
+
       return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4477!'  +username+'</h1>',
+    body: '<h1>Hello world4477!'  +user+'</h1>',
     cors: true,
   } 
-    }
+    
 
 
       
