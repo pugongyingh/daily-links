@@ -28,15 +28,15 @@ exports.handler = async (event,context,callback) => {
 
 
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-          service: 'Gmail',
-          auth: {
-              user: 'keesema@gmail.com',
-              clientId: '696537653215-76v6p9gjhktbe4gkqvn6n9lj1l5tq398.apps.googleusercontent.com',
-              clientSecret: 'mJT7lAGbbWr_rk63rVeI6XIs',
-              refreshToken: '1/IxHAxT9LMBxoEPQc-JUR00Vvt2e--XO_ciRO993be58'
-          }
-      });
+    let transporter =  nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        // secure: false, // true for 465, false for other ports
+        auth: {
+            user: "swarm.document@gmail.com", // generated ethereal user
+            pass: "swarm2562" // generated ethereal password
+        }
+    });
 
 
 
@@ -44,7 +44,7 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
  
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: 'keesema@gmail.com', // sender address
+        from: 'swarm.document@gmail.com', // sender address
         to: username, // list of receivers
         subject: "7676878768687687879798", // Subject line
         html: `<b>76987987768,<span style="color:red">767878</span></b><h2>78678667687</h2>` 
