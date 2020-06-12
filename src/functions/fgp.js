@@ -44,6 +44,7 @@ exports.handler = async (event,context,callback) => {
 
 const url = "http://127.0.0.1:8076/dy/change-password.html";
   let info =  await   transport.sendMail({
+      from: '<mit777@sina.com>',
       to: username,
       subject: "Confirm email",
       html: `Please click this link to confirm your email: <a href=${url}>${url}</a>`
