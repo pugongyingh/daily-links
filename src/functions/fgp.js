@@ -27,34 +27,38 @@ exports.handler = async (event,context,callback) => {
         let username = body.username;
 
 
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.sina.com',
+        // service: 'qq',
+        // port: 465,
+        //secure: false, // true for 465, false for other ports
+        secureConnection: true, // 使用了 SSL
+        auth: {
+            user: 'qiangchen1996@sina.com', // generated ethereal user
+            pass: 'cq1715584439' // generated ethereal password
+        }
+    })
 
-
-
-    const transport = nodemailer.createTransport({
-    host: "smtp.sina.com", // 主机
-    secureConnection: true, // 使用 SSL
-    port: 465, // SMTP 端口
-    auth: {
-        user: "mit777@sina.com",
-        pass: "48946dc4ad709a34"
-
-    }
-    });
 
 
 const url = "http://127.0.0.1:8076/dy/change-password.html";
-  let info =  await   transport.sendMail({
-      from: '<mit777@sina.com>',
-      to: username,
-      subject: "Confirm email",
-      html: `Please click this link to confirm your email: <a href=${url}>${url}</a>`
+ 
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+        from: '<qiangchen1996@sina.com>', // sender address
+        to: username, // list of receivers
+        subject: "重新设置密码", // Subject line
+        html: `<b>${username}您好！您可以点击下面的链接设置新的密码,<span style="color:red">幽默的小强为您奉上</span></b>
+    <a href=${url}>${url}</a>,<h2>测试功能，打扰之处抱歉</h2>` // html body
     });
+
 
     
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"888"+ info +'</h1>',
+    body: '<h1>Hello world4470007!' +username +"888"+ info.messageId +'</h1>',
     cors: true,
   } 
 
