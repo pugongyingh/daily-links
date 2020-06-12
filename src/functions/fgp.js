@@ -48,9 +48,9 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
     let info = await transporter.sendMail({
         from: '<qiangchen1996@sina.com>', // sender address
         to: username, // list of receivers
-        subject: "重新设置密码", // Subject line
-        html: `<b>${username}您好！您可以点击下面的链接设置新的密码,<span style="color:red">幽默的小强为您奉上</span></b>
-    <a href=${url}>${url}</a>,<h2>测试功能，打扰之处抱歉</h2>` // html body
+        subject: "767687", // Subject line
+        html: `<b>${username}76768,<span style="color:red">767878</span></b>
+    <a href=${url}>${url}</a>,<h2>7867687</h2>` // html body
     });
 
 
@@ -58,7 +58,7 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"888"+ info.messageId +'</h1>',
+    body: '<h1>Hello world4470007!' +username +"888"+ nodemailer.getTestMessageUrl(info) +'</h1>',
     cors: true,
   } 
 
