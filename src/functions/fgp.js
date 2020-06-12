@@ -25,43 +25,39 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
-
-
-var smtpTransport = nodemailer.createTransport("SMTP",{
-             host: "smtp.live.com", // hostname
-    secureConnection: true, // use SSL
-    port: 25, // port for secure SMTP
-            auth: {
-                 user: "horizonpropertyproject@hotmail.com",
-                 pass: "horizon1234"
-            }
-        });
-        var mailOptions = {
-            from: "horizonpropertyproject@hotmail.com", // sender address
-    to:username, // list of receivers
-    subject: "Enquiry for the price of sheth zuri platinum-belt : Actual Sample Flat", // Subject line
-    html: "<b>Client Name:  "+" </b><br><b>Email Id:  "+req.body.email+"</b><br><b>Country:  "+"</b><br><b>Mobile No.:  "+"</b><br><b>Require Room Type:  "+"</b><br><b>Visit Date  "+"</b><br><b>visit Time:  "+" "+"</b></br>" // html body
-
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'infoeclimax@gmail.com',
+            pass: 'eclimax.com'
         }
- let info =  await  smtpTransport.sendMail(mailOptions, function(error, response){
-        if(error){
-             return {
+    });
+    let mailOptions = {
+        // should be replaced with real recipient's account
+        to: username,
+        subject: 'COMPRA eClimax.com',
+        text: 'Hello world?', // plain text body
+        html: '<h1>Hello world4470007!' +username +"778887" +'</h1> // html body
+    };
+   let info =  await   transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+                      return {
     status: 200,
     type: 'text/html; charset=utf8',
     body: '<h1>Hello world4470007!' +username +"777"+ info.response +'</h1>',
     cors: true,
   } 
-        }else{
-           return {
+        }
+                   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"888"+ info.response +'</h1>',
+    body: '<h1>Hello world4470007!' +username +"778887"+ info.response +'</h1>',
     cors: true,
   } 
-        } 
-    }); 
-
-
+    });
+    
 
 
     
