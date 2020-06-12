@@ -61,7 +61,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
         } 
     }); 
 
-});
+
 
 
     
