@@ -15,7 +15,8 @@ const client = new faunadb.Client({
 
 exports.handler = async (event,context,callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    try {
+  
+  try {
              let body;
         try{
                 body = JSON.parse(event.body);
@@ -25,18 +26,29 @@ exports.handler = async (event,context,callback) => {
 
         let username = body.username;
 
+
+
+  try {
     const user = await client.query(
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
-
-
-
-      return {
+        return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4477!'  +user+'</h1>',
+    body: '<h1>Hello world888!'  +user+'</h1>',
     cors: true,
   } 
+  } catch (e) {
+        return {
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world4477!'  +'</h1>',
+    cors: true,
+  } 
+  }
+};
+
+
     
 
 
