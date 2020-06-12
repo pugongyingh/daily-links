@@ -39,7 +39,7 @@ exports.handler = async (event,context,callback) => {
         to: username,
         subject: 'COMPRA eClimax.com',
         text: 'Hello world?', // plain text body
-        html: '<h1>Hello world4470007!' +username +"778887" +'</h1> // html body
+        html: '<h1>Hello world4470007!' +username +"778887" +'</h1>' // html body
     };
    let info =  await   transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
