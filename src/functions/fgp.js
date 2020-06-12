@@ -58,7 +58,7 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
   return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"888"+ nodemailer.getTestMessageUrl(info) +'</h1>',
+    body: '<h1>Hello world4470007!' +username +"888"+ info.response +'</h1>',
     cors: true,
   } 
 
