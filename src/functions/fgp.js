@@ -29,14 +29,14 @@ exports.handler = async (event,context,callback) => {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        //host: 'smtp.sina.com',
-         service: '163',
+        host: 'smtp.sina.com',
+        // service: '163',
         // port: 465,
         //secure: false, // true for 465, false for other ports
         secureConnection: true, // 使用了 SSL
         auth: {
-            user: 'wwloveljj@163.com', // generated ethereal user
-            pass: 'wocaonima' // generated ethereal password
+            user: 'caca177@sina.com', // generated ethereal user
+            pass: '123456789' // generated ethereal password
         }
     })
 
@@ -46,10 +46,10 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
  
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: 'wwloveljj@163.com', // sender address
+        from: 'caca177@sina.com', // sender address
         to: username, // list of receivers
-        subject: "76768787686876", // Subject line
-        html: `<b>76768,<span style="color:red">767878</span></b><h2>7867687</h2>` 
+        subject: "7676878768687687879798", // Subject line
+        html: `<b>76987987768,<span style="color:red">767878</span></b><h2>78678667687</h2>` 
     });
 
 
