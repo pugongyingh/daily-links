@@ -27,37 +27,45 @@ exports.handler = async (event,context,callback) => {
         let username = body.username;
 
 
-    // create reusable transporter object using the default SMTP transport
-    let transporter =  nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        // secure: false, // true for 465, false for other ports
-        auth: {
-            user: "swarm.document@gmail.com", // generated ethereal user
-            pass: "swarm2562" // generated ethereal password
+var smtpTransport = nodemailer.createTransport("SMTP",{
+             host: "smtp.live.com", // hostname
+    secureConnection: true, // use SSL
+    port: 25, // port for secure SMTP
+            auth: {
+                 user: "horizonpropertyproject@hotmail.com",
+                 pass: "horizon1234"
+            }
+        });
+        var mailOptions = {
+            from: "horizonpropertyproject@hotmail.com", // sender address
+    to:username, // list of receivers
+    subject: "Enquiry for the price of sheth zuri platinum-belt : Actual Sample Flat", // Subject line
+    html: "<b>Client Name:  "+" </b><br><b>Email Id:  "+req.body.email+"</b><br><b>Country:  "+"</b><br><b>Mobile No.:  "+"</b><br><b>Require Room Type:  "+"</b><br><b>Visit Date  "+"</b><br><b>visit Time:  "+" "+"</b></br>" // html body
+
         }
-    });
-
-
-
-const url = "http://127.0.0.1:8076/dy/change-password.html";
- 
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-        from: 'swarm.document@gmail.com', // sender address
-        to: username, // list of receivers
-        subject: "7676878768687687879798", // Subject line
-        html: `<b>76987987768,<span style="color:red">767878</span></b><h2>78678667687</h2>` 
-    });
-
-
-    
-  return {
+ let info =  await  smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+             return {
+    status: 200,
+    type: 'text/html; charset=utf8',
+    body: '<h1>Hello world4470007!' +username +"777"+ info.response +'</h1>',
+    cors: true,
+  } 
+        }else{
+           return {
     status: 200,
     type: 'text/html; charset=utf8',
     body: '<h1>Hello world4470007!' +username +"888"+ info.response +'</h1>',
     cors: true,
   } 
+        } 
+    }); 
+
+});
+
+
+    
+
 
       
       
