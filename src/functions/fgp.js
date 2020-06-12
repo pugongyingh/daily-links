@@ -46,14 +46,14 @@ exports.handler = async (event,context,callback) => {
                       return {
     status: 500,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!</h1>',
+    body: '<h1>Hello world44700879807!</h1>',
     cors: true,
   } 
         }
                    return {
     status: 200,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"778887"+ info.response +'</h1>',
+    body: '<h1>Hello world4470007!</h1>',
     cors: true,
   } 
     });
