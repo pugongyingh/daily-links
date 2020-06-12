@@ -6,9 +6,9 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
 const q = faunadb.query;
 
-const client = new faunadb.Client({
-  secret: `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
-});
+//const client = new faunadb.Client({
+ // secret: `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
+//});
 
 
 
@@ -39,14 +39,14 @@ exports.handler = async (event,context,callback) => {
         to: username,
         subject: 'COMPRA eClimax.com',
         text: 'Hello world?', // plain text body
-        html: '<h1>Hello world4470007!' +username +"778887" +'</h1>' // html body
+        html: '<h1>Hello world4470007</h1>' // html body
     };
    let info =  await   transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
                       return {
-    status: 200,
+    status: 500,
     type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!' +username +"777"+ info.response +'</h1>',
+    body: '<h1>Hello world4470007!</h1>',
     cors: true,
   } 
         }
