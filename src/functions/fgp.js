@@ -46,11 +46,10 @@ const url = "http://127.0.0.1:8076/dy/change-password.html";
  
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: '<wwloveljj@163.com>', // sender address
+        from: 'wwloveljj@163.com', // sender address
         to: username, // list of receivers
-        subject: "767687", // Subject line
-        html: `<b>${username}76768,<span style="color:red">767878</span></b>
-    <a href=${url}>${url}</a>,<h2>7867687</h2>` // html body
+        subject: "76768787686876", // Subject line
+        html: `<b>76768,<span style="color:red">767878</span></b><h2>7867687</h2>` 
     });
 
 
