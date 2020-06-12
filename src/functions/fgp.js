@@ -46,7 +46,7 @@ exports.handler = async (event,context,callback) => {
     cors: true,
   } 
   }
-};
+
 
 
     
