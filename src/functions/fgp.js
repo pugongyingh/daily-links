@@ -25,22 +25,20 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: 'infoeclimax@gmail.com',
-            pass: 'eclimax.com'
-        }
-    });
-    let mailOptions = {
-        // should be replaced with real recipient's account
-        to: username,
-        subject: 'COMPRA eClimax.com',
-        text: 'Hello world?', // plain text body
-        html: '<h1>Hello world4470007</h1>' // html body
-    };
+  const transporter = nodemailer.createTransport({
+    service: 'Hotmail',
+    auth: {
+      user: 'caseritosTeam@hotmail.com',
+      pass: 'caseritos2020',
+    },
+  });
+  const mailOptions = {
+    from: 'caseritosTeam@hotmail.com',
+    to: username,
+    subject: 'Restablecimiento de Contraseña',
+    text: `Su nueva contraseña es nNo olvide cambiarla cuando inicie sesión`,
+  };
+
    let info =  await   transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
                       return {
