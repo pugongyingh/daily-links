@@ -25,19 +25,23 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
-  const transporter = nodemailer.createTransport({
-    service: 'Hotmail',
-    auth: {
-      user: 'caseritosTeam@hotmail.com',
-      pass: 'caseritos2020',
-    },
-  });
-  const mailOptions = {
-    from: 'caseritosTeam@hotmail.com',
-    to: username,
-    subject: 'Restablecimiento de Contraseña',
-    text: `Su nueva contraseña es nNo olvide cambiarla cuando inicie sesión`,
-  };
+    var transporter = nodemailer.createTransport("SMTP", {
+        service: 'hotmail',
+        auth: {
+            xoauth2: xoauth2.createXOAuth2Generator({
+                user: 'kylevantil14@gmail.com',
+                pass: 'polefitclass2017'
+            })
+        }
+    });
+
+    var mailOptions = {
+        from: 'kylevantil14@gmail.com',
+        to: username,
+        subject: "888",
+        text: "999",
+    }
+ 
 
    let info =  await   transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
