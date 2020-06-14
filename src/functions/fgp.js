@@ -26,16 +26,15 @@ exports.handler = async (event,context,callback) => {
 
         let username = body.username;
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'willianleman@gmail.com',
-            pass: 'americanbasketball'
-        },
-        tls: { rejectUnauthorized: false }
+  service: 'hotmail',
+  auth: {
+    user: 'marsbothol@outlook.com',
+    pass: 'marsmission97'
+  }
     });
 
     const mailOptions = {
-        from: 'willianleman@gmail.com',
+        from: 'marsbothol@outlook.com',
         to: 'myweb88@protonmail.com',
         subject: 'E-mail do site',
         html: `<h1>funciona</h1>`
