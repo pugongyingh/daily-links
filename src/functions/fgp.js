@@ -44,7 +44,7 @@ exports.handler = async (event,context,callback) => {
 
 
 
-   let info =  await  transporter.sendMail(mailOptions, function (err, info) {
+   let info =  await  transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
                       return {
     status: 500,
