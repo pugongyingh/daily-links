@@ -26,16 +26,18 @@ exports.handler = async (event,context,callback) => {
 
         let username = body.username;
     const transporter = nodemailer.createTransport({
-       service: 'hotmail',
+    host: "smtp.163.com", // 主机
+    secureConnection: true, // 使用 SSL
+    port: 465, // SMTP 端口
       auth: {
-          user: 'Hungry4Zone@outlook.com',
-          pass: 'H4Z.2015Recipes'
+          user: '15665690464@163.com',
+          pass: 'wanys000'
       }
 
     });
 
     const mailOptions = {
-        from: 'Hungry4Zone@outlook.com',
+        from: '15665690464@163.com',
         to: 'myweb88@protonmail.com',
         subject: 'E-mail do site',
         html: `<h1>funciona</h1>`
