@@ -1,83 +1,118 @@
-const { app, registerDefaultErrorHandler } = require('./bootstrap/app');
-const awsServerlessExpress = require('aws-serverless-express');
-const bcrypt = require('bcryptjs');
-const faunadb = require('faunadb');
-const jwt = require('jsonwebtoken');
-const nodemailer = require("nodemailer");
-const q = faunadb.query;
 
-//const client = new faunadb.Client({
- // secret: `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
-//});
+//require('dotenv').config()
+//const result = require('dotenv').config()
+const nodemailer = require('nodemailer');
 
+const mailUtils = require("../mail");
+export async function handler(event, context, callback){
+ // const { user, pass} = process.env
+ const  body = JSON.parse(event.body);
+    var min = "10000";
+   // const max = 99999;
+   // const num = Math.floor(Math.random() * (max - min + 1)) + min;
+var  mm = process.env.mm;
+var  tmp;
+ var  sub;
+  var  ss = parseInt(body.send);
+  var  tt = parseInt(body.tmp);
+  //var  str = body.name;
+ //             if(str.includes("先生")||str.includes("小姐")||str.includes("女士")||str.includes("经理")||str.includes("老师"))
+  //            {
+  //            }else {
+//body.name = str + "经理";
+//    };
 
+     mm =mm.split('!')[ss];
 
-
-exports.handler = async (event,context,callback) => {
-    context.callbackWaitsForEmptyEventLoop = false;
-  
-  try {
-             let body;
-        try{
-                body = JSON.parse(event.body);
-        }catch(ex){
-                body = event.body;
-        }
-
-        let username = body.username;
-    const transporter = nodemailer.createTransport({
-    host: "smtp.163.com", // 主机
+ 
+   switch (tt) {
+    case 1:
+      tmp = mailUtils.getMailBody1(body);
+      break;
+    case 2:
+      tmp = mailUtils.getMailBody2(body);
+      break;
+    case 3:
+      tmp = mailUtils.getMailBody3(body);
+      break;
+    case 4:
+      tmp = mailUtils.getMailBody4(body);
+      break;
+    case 5:
+      tmp = mailUtils.getMailBody5(body);
+      break;
+    default:
+      tmp = mailUtils.getMailBody1(body);
+  }
+   switch (tt) {
+    case 1:
+      sub = mailUtils.getMailSub1(body);
+      break;
+    case 2:
+      sub = mailUtils.getMailSub2(body);
+      break;
+    case 3:
+      sub = mailUtils.getMailSub3(body);
+      break;
+    case 4:
+      sub = mailUtils.getMailSub4(body);
+      break;
+    case 5:
+      sub = mailUtils.getMailSub5(body);
+      break;
+    default:
+      sub = mailUtils.getMailSub1(body);
+  }
+ var  mmm=mm.split(';')[0];
+ var  pp=mm.split(';')[1];
+ var  sss = mmm.split('@')[1];
+ var  hh;
+           if(sss == "sina.com.cn")
+          {
+             hh="smtp.sina.com";
+          }
+          else
+          {
+              hh="smtp."+ sss;
+          }
+    const transport = nodemailer.createTransport({
+    host: hh, // 主机
     secureConnection: true, // 使用 SSL
     port: 465, // SMTP 端口
-      auth: {
-          user: '15665690464@163.com',
-          pass: 'wanys000'
-      }
-
+    auth: {
+        user: mmm,
+        pass: pp
+    }
     });
 
-    const mailOptions = {
-        from: '15665690464@163.com',
-        to: 'myweb88@protonmail.com',
-        subject: 'E-mail do site',
-        html: `<h1>funciona</h1>`
-    };
+    //const { email }  = JSON.parse(event.body) 
+    let mailOptions = {
+      from: mmm,
+      to: `${body.email}`,
+      subject: sub,
+      text: tmp,
+  };
 
-
-
-
-   let info =  await  transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-                      return {
-    status: 500,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world44700879807!</h1>',
-    cors: true,
-  } 
-        }
-                   return {
-    status: 201,
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world4470007!</h1>',
-    cors: true,
-  } 
-    });
-    
-
-
-    
-
-
-      
-      
-      
-     
-    } catch (err) { 
-        const error = {
-            status: err.status || 500,
-            message: err.message || "Internal server error."
-        }
-        callback(JSON.stringify(error));
-    } 
+try{
+ //min="777";
+  let value = await transport.sendMail(mailOptions);
+  //transport.sendMail(mailOptions);
+  //console.log(value, mailOptions )
+ min= JSON.stringify(value.response);
+ //min= JSON.stringify(body.name);
+// min=process.env.yyy;
+  return {
+    statusCode: 200,
+    body: min.substring(1,28)
+  }
+}catch(err){
+//console.log(err)
+  return {
+    statusCode: 400,
+    body: "err"
+  };
 }
+
+}
+
 
