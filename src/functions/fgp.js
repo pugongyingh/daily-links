@@ -25,29 +25,22 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'lapukdee@gmail.com', // your email
-        pass: 'vwsiibnxsfprtsri' // your email password
-    }
-});
-// config สำหรับของ outlook
-// const transporter = nodemailer.createTransport({
-//     service: 'hotmail',
-//     auth: {
-//         user: 'yourmail@hotmail.com', // your email
-//         pass: 'password' // your email password
-//     }
-// });
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'willianleman@gmail.com',
+            pass: 'americanbasketball'
+        },
+        tls: { rejectUnauthorized: false }
+    });
 
+    const mailOptions = {
+        from: 'willianleman@gmail.com',
+        to: 'myweb88@protonmail.com',
+        subject: 'E-mail do site',
+        html: `<h1>funciona</h1>`
+    };
 
-let mailOptions = {
-    from: 'lapukdee@gmail.com',                   // sender
-    to: username,                // list of receivers
-    subject: 'Hello from sender Node.js Mail',      // Mail subject
-    html: ' <td width="100%" align="center" bgcolor="#bdbcba" style="padding:10px 10px 10px 10px">'
-};
 
 
 
@@ -61,7 +54,7 @@ let mailOptions = {
   } 
         }
                    return {
-    status: 200,
+    status: 201,
     type: 'text/html; charset=utf8',
     body: '<h1>Hello world4470007!</h1>',
     cors: true,
