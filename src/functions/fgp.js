@@ -25,25 +25,33 @@ exports.handler = async (event,context,callback) => {
         }
 
         let username = body.username;
-    var transporter = nodemailer.createTransport("SMTP", {
-        service: 'hotmail',
-        auth: {
-            xoauth2: xoauth2.createXOAuth2Generator({
-                user: 'kylevantil14@gmail.com',
-                pass: 'polefitclass2017'
-            })
-        }
-    });
-
-    var mailOptions = {
-        from: 'kylevantil14@gmail.com',
-        to: username,
-        subject: "888",
-        text: "999",
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'lapukdee@gmail.com', // your email
+        pass: 'vwsiibnxsfprtsri' // your email password
     }
- 
+});
+// config สำหรับของ outlook
+// const transporter = nodemailer.createTransport({
+//     service: 'hotmail',
+//     auth: {
+//         user: 'yourmail@hotmail.com', // your email
+//         pass: 'password' // your email password
+//     }
+// });
 
-   let info =  await   transporter.sendMail(mailOptions, (error, info) => {
+
+let mailOptions = {
+    from: 'lapukdee@gmail.com',                   // sender
+    to: username,                // list of receivers
+    subject: 'Hello from sender Node.js Mail',      // Mail subject
+    html: ' <td width="100%" align="center" bgcolor="#bdbcba" style="padding:10px 10px 10px 10px">'
+};
+
+
+
+   let info =  await  transporter.sendMail(mailOptions, function (err, info) {
         if (error) {
                       return {
     status: 500,
