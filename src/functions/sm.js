@@ -105,10 +105,6 @@ try{
 // min=process.env.yyy;
   return {
     statusCode: 200,
-     headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  },
     body: min,
     cors: true
   }
@@ -116,10 +112,6 @@ try{
 //console.log(err)
   return {
     statusCode: 400,
-     headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  },
     body: "err",
     cors: true
   };
