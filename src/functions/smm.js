@@ -8,7 +8,6 @@ const q = faunadb.query;
 const client = new faunadb.Client({
   secret: `fnADs5ccBTACCm5kbmjncetPrz6o9t2bqV5gQvZl`,
 });
-const mailUtils = require("../mail");
 export async function handler(event, context, callback){
  // const { user, pass} = process.env
  const  body = JSON.parse(event.body);
@@ -17,8 +16,8 @@ export async function handler(event, context, callback){
    // const num = Math.floor(Math.random() * (max - min + 1)) + min;
 var  mm = process.env.mm;
  var username = body.email;
-var  tmp;
- var  sub;
+var  tmp ="8888";
+ var  sub = "777“;
   var  ss = parseInt(body.send);
   var  tt = parseInt(body.tmp);
   //var  str = body.name;
@@ -30,73 +29,14 @@ var  tmp;
 
      mm =mm.split('!')[ss];
 
-   if (!mm) {
-  return {
-    statusCode: 400,
-     headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  },
-    body: "errm",
-    cors: true
-  };
-  }
+
 
  
     const user = await client.query(
       q.Get(q.Match(q.Index('users_by_username'), username)),
     );
 
-    if (user == null) {
-  return {
-    statusCode: 400,
-     headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  },
-    body: "errmu",
-    cors: true
-  };
-    }
  
-   switch (tt) {
-    case 1:
-      tmp = mailUtils.getMailBody1(body);
-      break;
-    case 2:
-      tmp = mailUtils.getMailBody2(body);
-      break;
-    case 3:
-      tmp = mailUtils.getMailBody3(body);
-      break;
-    case 4:
-      tmp = mailUtils.getMailBody4(body);
-      break;
-    case 5:
-      tmp = mailUtils.getMailBody5(body);
-      break;
-    default:
-      tmp = mailUtils.getMailBody1(body);
-  }
-   switch (tt) {
-    case 1:
-      sub = mailUtils.getMailSub1(body);
-      break;
-    case 2:
-      sub = mailUtils.getMailSub2(body);
-      break;
-    case 3:
-      sub = mailUtils.getMailSub3(body);
-      break;
-    case 4:
-      sub = mailUtils.getMailSub4(body);
-      break;
-    case 5:
-      sub = mailUtils.getMailSub5(body);
-      break;
-    default:
-      sub = mailUtils.getMailSub1(body);
-  }
  var  mmm=mm.split(';')[0];
  var  pp=mm.split(';')[1];
  var  sss = mmm.split('@')[1];
